@@ -9,7 +9,7 @@ Version:	2.2.2
 Release:	0.%{snap}.1
 License:	LGPL
 Group:		Libraries
-Source0:	http://ep09.kernel.pl/~misi3k/snap/gtk+-cursed-%{snap}.tar.bz2
+Source0:	http://ep09.pld-linux.org/~misi3k/snap/gtk+-cursed-%{snap}.tar.bz2
 # Source0-md5:	6387fa9b3a0aec376133841b3948dbec
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-ncurses.patch
