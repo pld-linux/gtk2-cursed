@@ -1,0 +1,13 @@
+diff -Nur gtk+curses.orig/gdk/cursed/Makefile.am gtk+curses.chng/gdk/cursed/Makefile.am
+--- gtk+curses.orig/gdk/cursed/Makefile.am	Thu Aug 28 11:15:26 2003
++++ gtk+curses.chng/gdk/cursed/Makefile.am	Thu Aug 28 11:18:54 2003
+@@ -20,7 +20,8 @@
+ 	-DG_DISABLE_DEPRECATED	\
+ 	-DGDK_PIXBUF_DISABLE_DEPRECATED	\
+ 	@GDK_DEP_CFLAGS@	\
+-	@GTK_DEBUG_FLAGS@
++	@GTK_DEBUG_FLAGS@	\
++	-I/usr/include/ncurses
+ 
+ noinst_LTLIBRARIES = libgdk-cursed.la
+ 
