@@ -14,14 +14,17 @@ Source0:	http://ep09.kernel.pl/~misi3k/snap/gtk+-cursed-%{snap}.tar.bz2
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-ncurses.patch
 BuildRequires:	atk-devel >= 1.0.0
-BuildRequires:	pango-devel >= 1.2.0
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	glib2-devel >= 2.2.0
-BuildRequires:	libtiff-devel
+BuildRequires:	gpm-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 1.2.2
-BuildRequires:	automake
+BuildRequires:	libtiff-devel
+BuildRequires:	libtool
 BuildRequires:	ncurses-devel
-BuildRequires:	gpm-devel
+BuildRequires:	pango-devel >= 1.2.0
+Requires(post):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -34,10 +37,10 @@ Port GTK+ na konsole tekstow±, oparty o ncurses.
 Summary:	Development tools for cursed GTK+
 Summary(pl):	Narzêdzia programisty dla GTK+ opartego na curses
 Group:		Development/Libraries
-Requires:	gtk2-cursed = %{version}
-Requires:	pango-devel >= %{pango_version}
-Requires:	atk-devel >= %{atk_version}
-Requires:	glib2-devel >= %{glib2_version}
+Requires:	%{name} = %{version}-%{release}
+Requires:	pango-devel >= 1.2.0
+Requires:	atk-devel >= 1.0.0
+Requires:	glib2-devel >= 2.2.0
 
 %description devel
 The gtk+-cursed-devel package contains the header files for the cursed
@@ -55,9 +58,9 @@ do tworzenia opartych na curses widgetów GTK+.
 %build
 %{__libtoolize}
 %{__aclocal}
+%{__autoconf}
 %{__autoheader}
 %{__automake}
-%{__autoconf}
 %configure \
 	--disable-gtk-doc \
 	--with-gdktarget=cursed
@@ -67,14 +70,15 @@ do tworzenia opartych na curses widgetów GTK+.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%makeinstall RUN_QUERY_IMMODULES_TEST=false RUN_QUERY_LOADER_TEST=false
-
-#%find_lang gtk20
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	RUN_QUERY_IMMODULES_TEST=false \
+	RUN_QUERY_LOADER_TEST=false
 
 ./mkinstalldirs $RPM_BUILD_ROOT%{_sysconfdir}/gtk-cursed-2.0
 
-# Remove unpackaged files
-rm $RPM_BUILD_ROOT%{_libdir}/*.la
+# useless (modules are dlopened through libgmodule)
+rm -f $RPM_BUILD_ROOT%{_libdir}/gtk-cursed-2.0/*/{immodules,loaders}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -83,31 +87,28 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 umask 022
 %{_bindir}/gtk-cursed-query-immodules-2.0 > %{_sysconfdir}/gtk-cursed-2.0/gtk.immodules
-%{_bindir}/gdk-pixbuf-query-loaders > %{_sysconfdir}/gtk-cursed-2.0/gdk-pixbuf.loaders
+# ? this program is from normal gtk+2
+#%{_bindir}/gdk-pixbuf-query-loaders > %{_sysconfdir}/gtk-cursed-2.0/gdk-pixbuf.loaders
 
-%postun
-/sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README
+%doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/gtk-cursed-demo
 %attr(755,root,root) %{_bindir}/gtk-cursed-query-immodules-2.0
-%attr(755,root,root) %{_libdir}/libgtk-cursed-2.0.so.*
-%attr(755,root,root) %{_libdir}/libgdk-cursed-2.0.so.*
-%attr(755,root,root) %{_libdir}/libgdk_cursed_pixbuf-2.0.so.*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %dir %{_libdir}/gtk-cursed-2.0
 %attr(755,root,root) %{_libdir}/gtk-cursed-2.0/%{bin_version}/immodules/*.so
-%{_libdir}/gtk-cursed-2.0/%{bin_version}/immodules/*.la
 %attr(755,root,root) %{_libdir}/gtk-cursed-2.0/%{bin_version}/loaders/*.so
-%{_libdir}/gtk-cursed-2.0/%{bin_version}/loaders/*.la
 %{_datadir}/gtk-cursed-2.0
 %dir %{_sysconfdir}/gtk-cursed-2.0
 
 %files devel
 %defattr(644,root,root,755)
-%{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.so
+%{_libdir}/lib*.la
 %{_libdir}/gtk-cursed-2.0/include
-%{_includedir}/*
-%{_aclocaldir}/*
-%{_libdir}/pkgconfig/*
+%{_includedir}/gtk-cursed-2.0
+%{_aclocaldir}/*.m4
+%{_pkgconfigdir}/*.pc
