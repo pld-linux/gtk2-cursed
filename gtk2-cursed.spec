@@ -1,15 +1,18 @@
 
-%define		snap	20030828
+%define		snap		20030828
+%define		bin_version	2.2.0
 
 Summary:	Text console port of GTK+, based on ncurses
 Summary(pl):	Port GTK+ na konsole tekstow±, oparty o ncurses
 Name:		gtk2-cursed
 Version:	2.2.2
-Release:	0.1
+Release:	0.%{snap}.1
 License:	LGPL
 Group:		Libraries
 Source0:	http://ep09.kernel.pl/~misi3k/snap/gtk+-cursed-%{snap}.tar.bz2
 # Source0-md5:	6387fa9b3a0aec376133841b3948dbec
+Patch0:		%{name}-am.patch
+Patch1:		%{name}-ncurses.patch
 BuildRequires:	atk-devel >= 1.0.0
 BuildRequires:	pango-devel >= 1.2.0
 BuildRequires:	glib2-devel >= 2.2.0
@@ -41,8 +44,15 @@ port of GTK+ widget toolkit.
 
 %prep
 %setup -q -n gtk+
+%patch0 -p1
+%patch1	-p1
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__autoheader}
+%{__automake}
+%{__autoconf}
 %configure \
 	--disable-gtk-doc \
 	--with-gdktarget=cursed
@@ -78,18 +88,20 @@ umask 022
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/gtk-cursed-demo
 %attr(755,root,root) %{_bindir}/gtk-cursed-query-immodules-2.0
-%{_libdir}/libgtk-cursed-2.0.so.*
-%{_libdir}/libgdk-cursed-2.0.so.*
-%{_libdir}/libgdk_cursed_pixbuf-2.0.so.*
+%attr(755,root,root) %{_libdir}/libgtk-cursed-2.0.so.*
+%attr(755,root,root) %{_libdir}/libgdk-cursed-2.0.so.*
+%attr(755,root,root) %{_libdir}/libgdk_cursed_pixbuf-2.0.so.*
 %dir %{_libdir}/gtk-cursed-2.0
-%{_libdir}/gtk-cursed-2.0/%{bin_version}
+%attr(755,root,root) %{_libdir}/gtk-cursed-2.0/%{bin_version}/immodules/*.so
+%{_libdir}/gtk-cursed-2.0/%{version}/immodules/*.la
+%attr(755,root,root) %{_libdir}/gtk-cursed-2.0/%{bin_version}/loaders/*.so
+%{_libdir}/gtk-cursed-2.0/%{version}/loaders/*.la
 %{_datadir}/gtk-cursed-2.0
 %dir %{_sysconfdir}/gtk-cursed-2.0
 
 %files devel
 %defattr(644,root,root,755)
 %{_libdir}/lib*.so
-%dir %{_libdir}/gtk-cursed-2.0
 %{_libdir}/gtk-cursed-2.0/include
 %{_includedir}/*
 %{_aclocaldir}/*
