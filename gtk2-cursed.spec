@@ -25,13 +25,14 @@ BuildRequires:	gpm-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Text console port of GTK+, based on ncurses
+Text console port of GTK+, based on ncurses.
 
 %description -l pl
-Port GTK+ na konsole tekstow±, oparty o ncurses
+Port GTK+ na konsole tekstow±, oparty o ncurses.
 
 %package devel
 Summary:	Development tools for cursed GTK+
+Summary(pl):	Narzêdzia programisty dla GTK+ opartego na curses
 Group:		Development/Libraries
 Requires:	gtk2-cursed = %{version}
 Requires:	pango-devel >= %{pango_version}
@@ -41,6 +42,10 @@ Requires:	glib2-devel >= %{glib2_version}
 %description devel
 The gtk+-cursed-devel package contains the header files for the cursed
 port of GTK+ widget toolkit.
+
+%description devel -l pl
+Pakiet gtk+-cursed-devel zawiera narzêdzia i pliki nag³ówkowe s³u¿±ce
+do tworzenia opartych na curses widgetów GTK+.
 
 %prep
 %setup -q -n gtk+
