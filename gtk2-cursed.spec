@@ -23,7 +23,7 @@ BuildRequires:	libpng-devel >= 1.2.2
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool
 BuildRequires:	ncurses-devel
-BuildRequires:	pango-devel >= 1.2.0
+BuildRequires:	pango-devel >= 1:1.2.0
 Requires(post):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -38,7 +38,7 @@ Summary:	Development tools for cursed GTK+
 Summary(pl):	Narzêdzia programisty dla GTK+ opartego na curses
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	pango-devel >= 1.2.0
+Requires:	pango-devel >= 1:1.2.0
 Requires:	atk-devel >= 1.0.0
 Requires:	glib2-devel >= 2.2.0
 
