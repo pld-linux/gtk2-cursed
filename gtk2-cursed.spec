@@ -93,9 +93,9 @@ umask 022
 %attr(755,root,root) %{_libdir}/libgdk_cursed_pixbuf-2.0.so.*
 %dir %{_libdir}/gtk-cursed-2.0
 %attr(755,root,root) %{_libdir}/gtk-cursed-2.0/%{bin_version}/immodules/*.so
-%{_libdir}/gtk-cursed-2.0/%{version}/immodules/*.la
+%{_libdir}/gtk-cursed-2.0/%{bin_version}/immodules/*.la
 %attr(755,root,root) %{_libdir}/gtk-cursed-2.0/%{bin_version}/loaders/*.so
-%{_libdir}/gtk-cursed-2.0/%{version}/loaders/*.la
+%{_libdir}/gtk-cursed-2.0/%{bin_version}/loaders/*.la
 %{_datadir}/gtk-cursed-2.0
 %dir %{_sysconfdir}/gtk-cursed-2.0
 
