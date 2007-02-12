@@ -3,7 +3,7 @@
 %define		bin_version	2.2.0
 
 Summary:	Text console port of GTK+, based on ncurses
-Summary(pl):	Port GTK+ na konsole tekstow±, oparty o ncurses
+Summary(pl.UTF-8):   Port GTK+ na konsole tekstowÄ…, oparty o ncurses
 Name:		gtk2-cursed
 Version:	2.2.2
 Release:	0.%{snap}.1
@@ -30,12 +30,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Text console port of GTK+, based on ncurses.
 
-%description -l pl
-Port GTK+ na konsole tekstow±, oparty o ncurses.
+%description -l pl.UTF-8
+Port GTK+ na konsole tekstowÄ…, oparty o ncurses.
 
 %package devel
 Summary:	Development tools for cursed GTK+
-Summary(pl):	Narzêdzia programisty dla GTK+ opartego na curses
+Summary(pl.UTF-8):   NarzÄ™dzia programisty dla GTK+ opartego na curses
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	pango-devel >= 1:1.2.0
@@ -46,9 +46,9 @@ Requires:	glib2-devel >= 2.2.0
 The gtk+-cursed-devel package contains the header files for the cursed
 port of GTK+ widget toolkit.
 
-%description devel -l pl
-Pakiet gtk+-cursed-devel zawiera narzêdzia i pliki nag³ówkowe s³u¿±ce
-do tworzenia opartych na curses widgetów GTK+.
+%description devel -l pl.UTF-8
+Pakiet gtk+-cursed-devel zawiera narzÄ™dzia i pliki nagÅ‚Ã³wkowe sÅ‚uÅ¼Ä…ce
+do tworzenia opartych na curses widgetÃ³w GTK+.
 
 %prep
 %setup -q -n gtk+
