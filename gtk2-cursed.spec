@@ -3,7 +3,7 @@
 %define		bin_version	2.2.0
 
 Summary:	Text console port of GTK+, based on ncurses
-Summary(pl.UTF-8):   Port GTK+ na konsole tekstową, oparty o ncurses
+Summary(pl.UTF-8):	Port GTK+ na konsole tekstową, oparty o ncurses
 Name:		gtk2-cursed
 Version:	2.2.2
 Release:	0.%{snap}.1
@@ -35,7 +35,7 @@ Port GTK+ na konsole tekstową, oparty o ncurses.
 
 %package devel
 Summary:	Development tools for cursed GTK+
-Summary(pl.UTF-8):   Narzędzia programisty dla GTK+ opartego na curses
+Summary(pl.UTF-8):	Narzędzia programisty dla GTK+ opartego na curses
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	pango-devel >= 1:1.2.0
