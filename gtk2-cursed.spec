@@ -52,8 +52,8 @@ do tworzenia opartych na curses widgetów GTK+.
 
 %prep
 %setup -q -n gtk+
-%patch0 -p1
-%patch1	-p1
+%patch -P0 -p1
+%patch -P1	-p1
 
 %build
 %{__libtoolize}
